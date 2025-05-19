@@ -30,6 +30,10 @@ func AuthenticatedClient(opts *clientconfig.ClientOpts, transport *http.Transpor
 	// Fixes #42
 	options.AllowReauth = true
 
+	options.Scope = &gophercloud.AuthScope{
+		System: true,
+	}
+
 	client, err := openstack.NewClient(options.IdentityEndpoint)
 	if err != nil {
 		return nil, err
@@ -55,6 +59,10 @@ func AuthenticatedClientV2(opts *clientconfigv2.ClientOpts, transport *http.Tran
 
 	// Fixes #42
 	options.AllowReauth = true
+
+	options.Scope = &gophercloudv2.AuthScope{
+		System: true,
+	}
 
 	client, err := openstackv2.NewClient(options.IdentityEndpoint)
 	if err != nil {
